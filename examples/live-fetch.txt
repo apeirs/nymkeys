@@ -1,0 +1,38 @@
+# an empty keyring; every fetch below goes through a new Nym client
+
+$ nymkeys fetch A490D0F4D311A4153E2BB7CADBB802B258ACD84F
+fetching A490D0F4D311A4153E2BB7CADBB802B258ACD84F from vks; a new Nym client and a random exit gateway for every key
+DBB802B258ACD84F  Tails developers <tails@tails.n…  imported   1 uids, 15 subkeys  [vks 42 KB; 7.7s]
+  via new Nym client, exit node 2604 (AU), ready in 2.9s
+exit 0
+
+$ nymkeys fetch --email torbrowser@torproject.org EF6E286DDA85EA2A4BA7DE684E2C6E8793298290
+fetching EF6E286DDA85EA2A4BA7DE684E2C6E8793298290 from vks,wkd; a new Nym client and a random exit gateway for every key
+4E2C6E8793298290  Tor Browser Developers (signing…  imported   1 uids, 8 subkeys  [vks 39 KB, wkd 7 KB; 10.2s]
+  via new Nym client, exit node 1909 (US), ready in 2.0s
+exit 0
+
+$ nymkeys fetch 6DAA6E64A76D2840571B4902528897B826403ADA
+fetching 6DAA6E64A76D2840571B4902528897B826403ADA from vks; a new Nym client and a random exit gateway for every key
+528897B826403ADA                                    failed     the answer has no user ID (keys.openpgp.org publishes user IDs only after the owner confirms the address); try --sources hkp, or --email ADDR for WKD  [vks 213 B; 6.0s]
+  via new Nym client, exit node 3342 (CH), ready in 3.4s
+exit 1
+
+$ nymkeys fetch --sources hkp 6DAA6E64A76D2840571B4902528897B826403ADA
+fetching 6DAA6E64A76D2840571B4902528897B826403ADA from hkp; a new Nym client and a random exit gateway for every key
+528897B826403ADA  Werner Koch (dist signing 2020)   imported   1 uids, 0 subkeys  [hkp 30 KB; 7.0s]
+  via new Nym client, exit node 2262 (TR), ready in 1.9s
+exit 0
+
+$ nymkeys fetch 4E2C6E8793298290
+nymkeys: "4E2C6E8793298290" is not a full fingerprint (40 or 64 hex digits)
+exit 1
+
+$ nymkeys list
+FINGERPRINT                               STATE  EXPIRES     UID                                       WKD DOMAINS
+6DAA6E64A76D2840571B4902528897B826403ADA  ok     2030-06-30  Werner Koch (dist signing 2020)           
+A490D0F4D311A4153E2BB7CADBB802B258ACD84F  ok     2028-10-22  Tails developers <tails@tails.net>        tails.net
+EF6E286DDA85EA2A4BA7DE684E2C6E8793298290  ok     2030-11-18  Tor Browser Developers (signing key) <t…  torproject.org
+3 keys
+exit 0
+

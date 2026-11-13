@@ -1,0 +1,41 @@
+$ examples/make-stale.sh $GNUPGHOME $STALE 2024-01-01   # drop subkeys and signatures made after 2024-01-01
+3 keys, 21 subkeys
+
+$ nymkeys list
+FINGERPRINT                               STATE  EXPIRES     UID                                       WKD DOMAINS
+6DAA6E64A76D2840571B4902528897B826403ADA  ok     2030-06-30  Werner Koch (dist signing 2020)           
+A490D0F4D311A4153E2BB7CADBB802B258ACD84F  ok     2028-10-22  Tails developers <tails@tails.net>        tails.net
+EF6E286DDA85EA2A4BA7DE684E2C6E8793298290  ok     2030-11-18  Tor Browser Developers (signing key) <t…  torproject.org
+3 keys
+
+$ nymkeys refresh --over 3m
+refreshing 3 key(s) in random order over ~3m0s from vks,wkd; a new Nym client and a random exit gateway for every key
+2026-11-13 08:24:10  [1/3] next in 38s
+2026-11-13 08:25:00  4E2C6E8793298290  Tor Browser Developers (signing…  updated    +1 subkey, +1 sig  [vks 39 KB, wkd 7 KB; 11.9s]
+                      via new Nym client, exit node 2950 (CA), ready in 3.1s
+2026-11-13 08:25:00  [2/3] next in 4s
+2026-11-13 08:25:42  DBB802B258ACD84F  Tails developers <tails@tails.n…  updated    +1 subkey, +1 sig  [vks 42 KB, wkd none; 37.6s]
+                      via new Nym client, exit node 2871 (GR), ready in 4.5s
+2026-11-13 08:25:42  [3/3] next in 5s
+2026-11-13 08:25:53  528897B826403ADA  Werner Koch (dist signing 2020)   unchanged  [vks 213 B, wkd -; 6.4s]
+                      via new Nym client, exit node 2718 (BR), ready in 1.9s
+done: 2 updated, 1 unchanged
+exit 0
+
+$ nymkeys refresh --now   (again: nothing new)
+note: --now sends the requests back to back; a keyserver can link them by time. Use --over for real use.
+refreshing 3 key(s) in random order over ~0s from vks,wkd; a new Nym client and a random exit gateway for every key
+2026-11-13 08:25:57  528897B826403ADA  Werner Koch (dist signing 2020)   unchanged  [vks 213 B, wkd -; 3.7s]
+                      via new Nym client, exit node 3183 (IT), ready in 1.7s
+2026-11-13 08:26:26  DBB802B258ACD84F  Tails developers <tails@tails.n…  unchanged  [vks 42 KB, wkd none; 29.6s]
+                      via new Nym client, exit node 3129 (NL), ready in 1.8s
+2026-11-13 08:26:36  4E2C6E8793298290  Tor Browser Developers (signing…  unchanged  [vks 39 KB, wkd 7 KB; 10.0s]
+                      via new Nym client, exit node 3459 (US), ready in 1.8s
+done: 3 unchanged
+exit 0
+
+$ nymkeys refresh --now --json EF6E286DDA85EA2A4BA7DE684E2C6E8793298290
+refreshing 1 key(s) in random order over ~0s from vks,wkd; a new Nym client and a random exit gateway for every key
+{"fingerprint":"EF6E286DDA85EA2A4BA7DE684E2C6E8793298290","name":"Tor Browser Developers (signing key) \u003ctorbrowser@torproject.org\u003e","via":"new Nym client, exit node 3467 (UA), ready in 2.1s","sources":[{"source":"vks","bytes":39452,"ok":true},{"source":"wkd","bytes":6693,"ok":true}],"outcome":"unchanged","merge":{"changed":false,"new_uids":0,"new_subkeys":0,"new_signatures":0,"new_revocations":0},"took_ns":8569090786,"attempts":1}
+done: 1 unchanged
+exit 0

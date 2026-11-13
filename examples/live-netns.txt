@@ -1,0 +1,45 @@
+gpg: no gpg-agent running in this session
+== this namespace has no route out:
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+   curl: (7) Failed to connect to 1.1.1.1:443 after 0 ms: Could not connect to server
+   local DNS: no answer
+
+== nymkeys list
+   FINGERPRINT                               STATE  EXPIRES     UID                                       WKD DOMAINS
+   6DAA6E64A76D2840571B4902528897B826403ADA  ok     2030-06-30  Werner Koch (dist signing 2020)           
+   A490D0F4D311A4153E2BB7CADBB802B258ACD84F  ok     2028-10-22  Tails developers <tails@tails.net>        tails.net
+   EF6E286DDA85EA2A4BA7DE684E2C6E8793298290  ok     2030-11-18  Tor Browser Developers (signing key) <t…  torproject.org
+   3 keys
+
+== nymkeys refresh --proxy 127.0.0.1:1095 --now  (the keyring is out of date)
+   note: --now sends the requests back to back; a keyserver can link them by time. Use --over for real use.
+   refreshing 3 key(s) in random order over ~0s from vks,wkd; one shared Nym client at 127.0.0.1:1095 (the exit can link these requests; drop --proxy for a new client per key)
+   2026-11-13 08:28:55  DBB802B258ACD84F  Tails developers <tails@tails.n…  updated    +1 subkey, +1 sig  [vks 42 KB, wkd none; 25.0s]
+                         via shared Nym client 127.0.0.1:1095
+   2026-11-13 08:28:57  528897B826403ADA  Werner Koch (dist signing 2020)   unchanged  [vks 213 B, wkd -; 1.8s]
+                         via shared Nym client 127.0.0.1:1095
+   2026-11-13 08:29:02  4E2C6E8793298290  Tor Browser Developers (signing…  updated    +1 subkey, +1 sig  [vks 39 KB, wkd 7 KB; 4.8s]
+                         via shared Nym client 127.0.0.1:1095
+   done: 2 updated, 1 unchanged
+
+== the same again (nothing new now)
+   note: --now sends the requests back to back; a keyserver can link them by time. Use --over for real use.
+   refreshing 3 key(s) in random order over ~0s from vks,wkd; one shared Nym client at 127.0.0.1:1095 (the exit can link these requests; drop --proxy for a new client per key)
+   2026-11-13 08:29:11  4E2C6E8793298290  Tor Browser Developers (signing…  unchanged  [vks 39 KB, wkd 7 KB; 9.9s]
+                         via shared Nym client 127.0.0.1:1095
+   2026-11-13 08:29:13  528897B826403ADA  Werner Koch (dist signing 2020)   unchanged  [vks 213 B, wkd -; 1.7s]
+                         via shared Nym client 127.0.0.1:1095
+   2026-11-13 08:29:41  DBB802B258ACD84F  Tails developers <tails@tails.n…  unchanged  [vks 42 KB, wkd none; 27.4s]
+                         via shared Nym client 127.0.0.1:1095
+   done: 3 unchanged
+
+== with the proxy gone: no fallback, it just fails
+   note: --now sends the requests back to back; a keyserver can link them by time. Use --over for real use.
+   refreshing 3 key(s) in random order over ~0s from vks,wkd; one shared Nym client at 127.0.0.1:1 (the exit can link these requests; drop --proxy for a new client per key)
+   2026-11-13 08:29:41  DBB802B258ACD84F  Tails developers <tails@tails.n…  failed     no source answered (vks: no SOCKS5 proxy (nym-socks5-client) listening; refusing to fall back to a direct connecti…)  [vks error, wkd error; 0.0s, 2 tries]
+                         via shared Nym client 127.0.0.1:1
+   2026-11-13 08:29:41  4E2C6E8793298290  Tor Browser Developers (signing…  failed     no source answered (vks: no SOCKS5 proxy (nym-socks5-client) listening; refusing to fall back to a direct connecti…)  [vks error, wkd error; 0.0s, 2 tries]
+                         via shared Nym client 127.0.0.1:1
+   2026-11-13 08:29:41  528897B826403ADA  Werner Koch (dist signing 2020)   failed     no source answered (vks: no SOCKS5 proxy (nym-socks5-client) listening; refusing to fall back to a direct connecti…)  [vks error, wkd -; 0.0s, 2 tries]
+                         via shared Nym client 127.0.0.1:1
+   done: 3 failed

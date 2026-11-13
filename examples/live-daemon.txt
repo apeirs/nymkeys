@@ -1,0 +1,20 @@
+$ nymkeys daemon --period 3m   (stopped with SIGTERM after 6 minutes; the default period is a week)
+nymkeys daemon: each key about once per 3m0s, random order and times, a new Nym client and a random exit gateway for every key
+2026-11-13 08:29:00  4E2C6E8793298290  Tor Browser Developers (signing…  updated    +1 subkey, +1 sig  [vks 39 KB, wkd 7 KB; 8.1s]
+                      via new Nym client, exit node 2943 (NL), ready in 1.9s
+2026-11-13 08:30:59  4E2C6E8793298290  Tor Browser Developers (signing…  unchanged  [vks 39 KB, wkd 7 KB; 7.2s]
+                      via new Nym client, exit node 3189 (CY), ready in 1.8s
+2026-11-13 08:31:19  4E2C6E8793298290  Tor Browser Developers (signing…  unchanged  [vks 39 KB, wkd 7 KB; 7.9s]
+                      via new Nym client, exit node 3309 (PL), ready in 1.9s
+2026-11-13 08:32:09  DBB802B258ACD84F  Tails developers <tails@tails.n…  updated    +1 subkey, +1 sig  [vks 42 KB, wkd none; 30.2s]
+                      via new Nym client, exit node 2010, ready in 1.9s
+2026-11-13 08:34:26  DBB802B258ACD84F  Tails developers <tails@tails.n…  unchanged  [vks 42 KB, wkd none; 27.4s]
+                      via new Nym client, exit node 3113 (NL), ready in 1.7s
+2026-11-13 08:34:34  DBB802B258ACD84F  Tails developers <tails@tails.n…  unchanged  [vks 42 KB, wkd error; 7.3s]
+                      via new Nym client, exit node 2689 (AT), ready in 2.1s
+exit 124 (124 = stopped by timeout)
+
+$ pgrep -c -f 'nym-socks5-client run --id nymkeys$'   # per-key clients left running
+0
+$ ls -d /tmp/nymkeys-eph-*   # identities left behind
+(none)

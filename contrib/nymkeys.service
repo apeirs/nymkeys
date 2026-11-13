@@ -1,0 +1,29 @@
+# systemd user service: keep your keyring fresh through the Nym mixnet.
+# Each key is refreshed about once a week, at random times, each through a
+# new throwaway Nym client. No root needed.
+#
+#   cp nymkeys.service ~/.config/systemd/user/
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now nymkeys
+#   journalctl --user -u nymkeys -f
+#
+# Edit the two paths if nymkeys or nym-socks5-client live elsewhere.
+
+[Unit]
+Description=Refresh OpenPGP keys through the Nym mixnet (nymkeys)
+Documentation=https://github.com/apeirs/nymkeys
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+Environment=NYMKEYS_NYM_SOCKS5=%h/.local/bin/nym-socks5-client
+ExecStart=%h/go/bin/nymkeys daemon --period 168h
+Restart=on-failure
+RestartSec=5min
+Nice=10
+NoNewPrivileges=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=default.target

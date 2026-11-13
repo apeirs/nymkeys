@@ -1,0 +1,23 @@
+direct dial instead of SOCKS5              caught by TestDryRunImportsNothing, TestExtraKeysRejected, TestNoProxyNoFallback, TestNotFound, TestOnlyMixnetNamesNoUserAgent, TestOversizeDropped, TestRedirectToHTTPRefused, TestRetryUsesANewSession, TestRevocationArrives, TestSecretKeyNeverAccepted, TestThirdPartyCertificationsDropped, TestUpdateMergesNewSubkeyAndExpiry, TestWKDAdvancedBlackholeFallsBackFast, TestWrongKeyRejected
+User-Agent sent                            caught by TestOnlyMixnetNamesNoUserAgent
+plain-http redirect followed               caught by TestRedirectToHTTPRefused
+plain-http keyserver URL allowed           caught by TestPlainHTTPKeyserverRefused
+answers not checked at all                 caught by TestExtraKeysRejected, TestSecretKeyNeverAccepted, TestWrongKeyRejected
+extra keys in an answer allowed            caught by TestExtraKeysRejected
+merge-only dropped                         caught by TestMergeOnlyNeverAddsKeys
+third-party certifications kept            caught by TestThirdPartyCertificationsDropped
+no size cap                                caught by TestOversizeDropped
+revocation not reported                    caught by TestRevocationArrives
+keys refreshed in keyring order            caught by TestBatchRandomOrderOneSessionPerKey
+no wait before a key                       caught by TestBatchRandomOrderOneSessionPerKey
+fixed gaps instead of exponential          caught by TestGapsArePoisson
+ephemeral client shares the user's HOME    caught by TestEphemeralIsPrivateAndCleanedUp
+ephemeral identity not deleted             caught by TestEphemeralIsPrivateAndCleanedUp, TestEphemeralStartupFailureCleansUp
+ephemeral client without reply SURBs       caught by TestEphemeralIsPrivateAndCleanedUp
+proxy env passed to the Nym client         caught by TestCleanEnv
+no cap on the WKD advanced request         caught by TestWKDAdvancedBlackholeFallsBackFast
+skipped source counted as an answer        caught by TestNoProxyNoFallback
+no retry when nothing answered             caught by TestRetryUsesANewSession
+daemon refreshes revoked keys              caught by TestDaemonSleepsBeforeEachRefresh
+dead advanced host reported as an error    caught by TestWKDAdvancedBlackholeFallsBackFast
+22 of 22 mutations caught
